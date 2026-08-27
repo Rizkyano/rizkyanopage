@@ -22,7 +22,7 @@ const ProjectScreenshotPreview: React.FC<{ project: Project }> = ({ project }) =
   );
 };
 
-// Compact Stacking Parallax Card with Centered Alignment & Full Scroll Buffer
+// Compact Stacking Parallax Card with Full Sticky Holding Buffer
 const StackingParallaxCard: React.FC<{
   project: Project;
   index: number;
@@ -35,11 +35,11 @@ const StackingParallaxCard: React.FC<{
     <div
       className={`sticky w-full will-change-transform ${
         isLast 
-          ? 'mb-[50vh] sm:mb-[65vh] lg:mb-[75vh]' // Extended runway ensures Card 3 stacks completely and holds in view
-          : 'mb-44 sm:mb-60 lg:mb-72'
+          ? 'mb-0' 
+          : 'mb-48 sm:mb-64 lg:mb-80'
       }`}
       style={{
-        // Generous top offset so card is centered vertically and never touches the navbar
+        // Centered top offset with ample room below navbar
         top: `calc(5.8rem + ${index * 14}px)`,
         zIndex: index + 10,
         transform: 'translateZ(0)',
@@ -244,7 +244,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({ onSelectProject }) => 
   }, []);
 
   return (
-    <section id="selected-work" className="relative w-full px-4 sm:px-8 lg:px-14 pt-12 pb-16 select-none">
+    <section id="selected-work" className="relative w-full px-4 sm:px-8 lg:px-14 pt-12 select-none">
       {/* Centered Grand Title */}
       <div 
         ref={titleRef}
@@ -283,8 +283,8 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({ onSelectProject }) => 
         </p>
       </div>
 
-      {/* Parallax Sticky Stacking Cards Container with Extended Scroll Runway */}
-      <div className="relative w-full">
+      {/* Parallax Sticky Stacking Cards Container with 130vh Scroll Runway for 100% Full Stacking */}
+      <div className="relative w-full pb-[110vh] sm:pb-[130vh]">
         {PROJECTS.map((project, index) => (
           <StackingParallaxCard
             key={project.id}
