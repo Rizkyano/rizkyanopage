@@ -22,23 +22,30 @@ const ProjectScreenshotPreview: React.FC<{ project: Project }> = ({ project }) =
   );
 };
 
-// Compact Stacking Parallax Card (Comfortably fits in standard viewports at 100% zoom)
+// Compact Stacking Parallax Card with Centered Alignment & Full Scroll Buffer
 const StackingParallaxCard: React.FC<{
   project: Project;
   index: number;
   total: number;
   onSelect: (p: Project) => void;
-}> = ({ project, index, onSelect }) => {
+}> = ({ project, index, total, onSelect }) => {
+  const isLast = index === total - 1;
+
   return (
     <div
-      className="sticky w-full mb-32 sm:mb-44 will-change-transform"
+      className={`sticky w-full will-change-transform ${
+        isLast 
+          ? 'mb-[50vh] sm:mb-[65vh] lg:mb-[75vh]' // Extended runway ensures Card 3 stacks completely and holds in view
+          : 'mb-44 sm:mb-60 lg:mb-72'
+      }`}
       style={{
-        top: `calc(4.0rem + ${index * 12}px)`,
+        // Generous top offset so card is centered vertically and never touches the navbar
+        top: `calc(5.8rem + ${index * 14}px)`,
         zIndex: index + 10,
         transform: 'translateZ(0)',
       }}
     >
-      {/* Outer Card Shell with Compact Padding & Refined Proportions */}
+      {/* Outer Card Shell */}
       <div
         onMouseEnter={() => sound.playHover()}
         className="relative w-full rounded-2xl sm:rounded-3xl dark:bg-[#0a0f1d]/95 bg-white/95 backdrop-blur-md dark:border-white/15 border-slate-200 shadow-[0_20px_70px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_70px_rgba(0,0,0,0.85)] p-5 sm:p-7 lg:p-8 overflow-hidden transition-colors duration-200 dark:hover:border-white/35 hover:border-slate-300 group"
@@ -50,7 +57,7 @@ const StackingParallaxCard: React.FC<{
         />
 
         <div className="grid grid-cols-12 gap-5 lg:gap-8 xl:gap-10 items-center relative z-10">
-          {/* Left Column: Project Details (Compact & Balanced) */}
+          {/* Left Column: Project Details */}
           <div className="col-span-12 lg:col-span-6 flex flex-col justify-between space-y-3.5 sm:space-y-4">
             {/* Top Badges Row */}
             <div className="flex flex-wrap items-center gap-2.5 font-mono text-[11px]">
@@ -75,12 +82,12 @@ const StackingParallaxCard: React.FC<{
               </span>
             </div>
 
-            {/* Project Title (Proportional & Punchy) */}
+            {/* Project Title */}
             <h3 className="text-xl sm:text-2xl lg:text-3xl font-sans font-bold dark:text-white text-slate-900 tracking-tight leading-snug">
               {project.title}
             </h3>
 
-            {/* Description (Concise & Readable) */}
+            {/* Description */}
             <p className="dark:text-slate-300 text-slate-700 text-xs sm:text-sm leading-relaxed font-normal">
               {project.description}
             </p>
@@ -113,7 +120,7 @@ const StackingParallaxCard: React.FC<{
               ))}
             </div>
 
-            {/* Action Buttons (Always clearly visible in viewport) */}
+            {/* Action Buttons */}
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <button
                 onClick={() => {
@@ -237,11 +244,11 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({ onSelectProject }) => 
   }, []);
 
   return (
-    <section id="selected-work" className="relative w-full px-4 sm:px-8 lg:px-14 pt-12 pb-24 select-none">
+    <section id="selected-work" className="relative w-full px-4 sm:px-8 lg:px-14 pt-12 pb-16 select-none">
       {/* Centered Grand Title */}
       <div 
         ref={titleRef}
-        className="relative w-full min-h-[50vh] sm:min-h-[60vh] flex flex-col items-center justify-center text-center mb-14 sm:mb-18 will-change-transform"
+        className="relative w-full min-h-[50vh] sm:min-h-[60vh] flex flex-col items-center justify-center text-center mb-16 sm:mb-24 will-change-transform"
         style={{
           opacity: titleTransform.opacity,
           transform: `translate3d(0,0,0) scale(${titleTransform.scale})`,
@@ -276,7 +283,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({ onSelectProject }) => 
         </p>
       </div>
 
-      {/* Parallax Sticky Stacking Cards Container with Extended Scroll Margin */}
+      {/* Parallax Sticky Stacking Cards Container with Extended Scroll Runway */}
       <div className="relative w-full">
         {PROJECTS.map((project, index) => (
           <StackingParallaxCard
