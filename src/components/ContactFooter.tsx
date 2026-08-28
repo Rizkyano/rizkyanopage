@@ -15,7 +15,7 @@ export const ContactFooter: React.FC = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.08 }
+      { threshold: 0.08 },
     );
 
     if (footerRef.current) {
@@ -48,16 +48,12 @@ export const ContactFooter: React.FC = () => {
   };
 
   return (
-    <footer 
-      id="contact" 
-      ref={footerRef}
-      className="relative w-full px-4 sm:px-8 lg:px-14 pt-16 sm:pt-20 pb-10 sm:pb-12 select-none border-t dark:border-white/10 border-slate-200"
-    >
+    <footer id="contact" ref={footerRef} className="relative w-full px-4 sm:px-8 lg:px-14 pt-16 sm:pt-20 pb-10 sm:pb-12 select-none border-t dark:border-white/10 border-slate-200">
       <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col justify-between space-y-8 sm:space-y-10">
         {/* Main CTA Block */}
         <div className="flex flex-col items-start space-y-5">
           {/* Badge Pill with Ping Glow */}
-          <div 
+          <div
             className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full dark:bg-cyan-950/70 bg-cyan-100/90 dark:border-cyan-500/40 border-cyan-300 text-cyan-600 dark:text-cyan-400 font-mono text-xs font-semibold shadow-[0_0_20px_rgba(6,182,212,0.15)] transform transition-all duration-700 ease-out ${
               isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-90"
             }`}
@@ -71,32 +67,26 @@ export const ContactFooter: React.FC = () => {
           </div>
 
           {/* Headline with dynamic reveal & gradient shimmer */}
-          <h2 
+          <h2
             className={`text-3xl sm:text-5xl md:text-6xl font-sans font-bold dark:text-white text-slate-900 tracking-tight leading-[1.05] transform transition-all duration-700 delay-150 ease-out ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
             HAVE AN IDEA? <br />
-            <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-sm">
-              LET'S COLLABORATE.
-            </span>
+            <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-sm">LET'S COLLABORATE.</span>
           </h2>
 
           {/* Description */}
-          <p 
+          <p
             className={`dark:text-slate-300 text-slate-600 text-sm sm:text-base max-w-xl font-normal leading-relaxed transform transition-all duration-700 delay-300 ease-out ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            Always open to discussing design engineering, 3D WebGL interactions, design systems, and innovative web architectures.
+            Always open to discussing design engineering, design systems, and innovative web architectures.
           </p>
 
           {/* Interactive Action Area: Email Copy Box & Send Direct */}
-          <div 
-            className={`flex flex-wrap items-center gap-3 pt-2 transform transition-all duration-700 delay-450 ease-out ${
-              isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95"
-            }`}
-          >
+          <div className={`flex flex-wrap items-center gap-3 pt-2 transform transition-all duration-700 delay-450 ease-out ${isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95"}`}>
             <button
               onClick={copyEmail}
               onMouseEnter={() => sound.playHover()}
@@ -119,16 +109,12 @@ export const ContactFooter: React.FC = () => {
               <Send size={13} />
             </a>
 
-            {copied && (
-              <span className="text-xs font-mono text-emerald-500 animate-fadeIn font-semibold flex items-center gap-1">
-                ✓ Copied to clipboard!
-              </span>
-            )}
+            {copied && <span className="text-xs font-mono text-emerald-500 animate-fadeIn font-semibold flex items-center gap-1">✓ Copied to clipboard!</span>}
           </div>
         </div>
 
         {/* Social Links & Copyright */}
-        <div 
+        <div
           className={`flex flex-wrap items-center justify-between gap-4 pt-6 border-t dark:border-white/10 border-slate-200 font-mono text-xs dark:text-slate-400 text-slate-600 transform transition-all duration-700 delay-600 ease-out ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}
