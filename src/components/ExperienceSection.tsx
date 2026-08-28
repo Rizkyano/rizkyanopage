@@ -108,29 +108,29 @@ export const ExperienceSection: React.FC = () => {
     <section 
       id="experience" 
       ref={sectionRef}
-      className="relative w-full select-none"
+      className="relative w-full select-none mb-16 sm:mb-24"
       style={{
-        height: '200vh',
+        height: '190vh',
       }}
     >
-      {/* Sticky Full-Viewport 3-Column Stage */}
-      <div className="sticky top-14 sm:top-16 w-full min-h-[85vh] flex items-center justify-center px-4 sm:px-8 lg:px-14 py-8 overflow-hidden">
-        <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+      {/* Sticky Full-Viewport 3-Column Stage (Clear of top navbar) */}
+      <div className="sticky top-16 sm:top-20 w-full h-[calc(100vh-5rem)] flex items-center justify-center px-4 sm:px-6 lg:px-10 py-3 sm:py-4 overflow-hidden">
+        <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 items-stretch">
           {EXPERIENCES.map((exp, index) => {
-            const enterStart = index * 0.28;
-            const enterDuration = 0.32;
+            const enterStart = index * 0.22;
+            const enterDuration = 0.30;
             const cardProgress = Math.max(0, Math.min(1, (scrollProgress - enterStart) / enterDuration));
 
             const opacity = Math.pow(cardProgress, 1.3);
-            const translateY = (1 - cardProgress) * 50;
-            const scale = 0.94 + cardProgress * 0.06;
+            const translateY = (1 - cardProgress) * 40;
+            const scale = 0.95 + cardProgress * 0.05;
             const isVisible = cardProgress > 0.02;
 
             return (
               <div
                 key={exp.id}
                 onMouseEnter={() => isVisible && sound.playHover()}
-                className="relative rounded-3xl dark:bg-[#0a0f1d]/95 bg-white/95 backdrop-blur-md dark:border-white/15 border-slate-200 shadow-[0_20px_60px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-6 sm:p-8 flex flex-col justify-between overflow-hidden transition-all duration-200 dark:hover:border-white/35 hover:border-slate-300 group will-change-transform"
+                className="relative rounded-2xl sm:rounded-3xl dark:bg-[#0a0f1d] bg-white dark:border-white/15 border-slate-200 shadow-[0_15px_50px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.8)] p-4 sm:p-5 lg:p-6 flex flex-col justify-between overflow-hidden transition-all duration-200 dark:hover:border-white/35 hover:border-slate-300 group will-change-transform"
                 style={{
                   opacity,
                   transform: `translate3d(0, ${translateY}px, 0) scale(${scale})`,
@@ -140,18 +140,18 @@ export const ExperienceSection: React.FC = () => {
               >
                 {/* Themed Ambient Radial Glow */}
                 <div
-                  className="absolute -top-24 -right-24 w-64 h-64 rounded-full blur-[80px] pointer-events-none opacity-15 dark:opacity-20 group-hover:opacity-30 transition-opacity duration-300"
+                  className="absolute -top-20 -right-20 w-60 h-60 rounded-full blur-[70px] pointer-events-none opacity-15 dark:opacity-20 group-hover:opacity-30 transition-opacity duration-300"
                   style={{ backgroundColor: exp.accentColor }}
                 />
 
                 {/* Top Corner Accent */}
-                <div className="absolute top-0 left-0 w-24 h-24 bg-gradient-to-br from-black/5 dark:from-white/10 to-transparent pointer-events-none rounded-tl-3xl" />
+                <div className="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-black/5 dark:from-white/10 to-transparent pointer-events-none rounded-tl-3xl" />
 
                 {/* Card Header Info */}
                 <div className="relative z-10">
-                  <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                     {/* Company Name */}
-                    <h3 className="text-xl sm:text-2xl font-sans font-bold dark:text-white text-slate-900 tracking-tight">
+                    <h3 className="text-lg sm:text-xl font-sans font-bold dark:text-white text-slate-900 tracking-tight">
                       {exp.company}
                     </h3>
 
@@ -165,27 +165,27 @@ export const ExperienceSection: React.FC = () => {
                   </div>
 
                   {/* Location & Period */}
-                  <div className="flex flex-col gap-1 text-xs font-mono dark:text-slate-400 text-slate-500 mb-3">
+                  <div className="flex flex-col gap-0.5 text-[11px] font-mono dark:text-slate-400 text-slate-500 mb-2">
                     <span>· {exp.location}</span>
-                    <span className="font-mono text-[11px]">{exp.period}</span>
+                    <span className="font-mono text-[10.5px]">{exp.period}</span>
                   </div>
 
                   {/* Role Title */}
-                  <div className="mb-4">
-                    <span className={`text-base font-semibold italic ${exp.roleColor}`}>
+                  <div className="mb-2.5">
+                    <span className={`text-sm sm:text-base font-semibold italic ${exp.roleColor}`}>
                       {exp.role}
                     </span>
                   </div>
 
                   {/* Description */}
-                  <p className="dark:text-slate-300 text-slate-700 text-xs sm:text-sm leading-relaxed mb-6 font-normal">
+                  <p className="dark:text-slate-300 text-slate-700 text-xs leading-relaxed mb-3 font-normal">
                     {exp.description}
                   </p>
 
                   {/* Bullet Points */}
-                  <ul className="space-y-2.5 pt-3 border-t dark:border-white/10 border-slate-200">
+                  <ul className="space-y-1.5 pt-2.5 border-t dark:border-white/10 border-slate-200">
                     {exp.bullets.map((bullet, bIdx) => (
-                      <li key={bIdx} className="flex items-start gap-2.5 text-xs dark:text-slate-300 text-slate-700 font-normal leading-relaxed">
+                      <li key={bIdx} className="flex items-start gap-2 text-[11px] sm:text-xs dark:text-slate-300 text-slate-700 font-normal leading-relaxed">
                         <span 
                           className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0"
                           style={{ backgroundColor: exp.accentColor }} 
@@ -196,8 +196,8 @@ export const ExperienceSection: React.FC = () => {
                   </ul>
                 </div>
 
-                {/* Bottom Verification Footer */}
-                <div className="relative z-10 mt-6 pt-4 border-t dark:border-white/5 border-slate-200 flex justify-between items-center text-[10px] font-mono dark:text-slate-500 text-slate-400 uppercase tracking-widest">
+                {/* Bottom Verification Footer (Always visible at zoom 100%) */}
+                <div className="relative z-10 mt-3 sm:mt-4 pt-2.5 border-t dark:border-white/5 border-slate-200 flex justify-between items-center text-[10px] font-mono dark:text-slate-500 text-slate-400 uppercase tracking-widest">
                   <span>0{index + 1} / 03</span>
                   <span style={{ color: exp.accentColor }} className="font-bold">CONFIRMED</span>
                 </div>

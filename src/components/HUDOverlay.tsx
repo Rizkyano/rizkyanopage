@@ -1,6 +1,6 @@
 import React from 'react';
 import { sound } from '../utils/soundFX';
-import { Volume2, VolumeX, Moon, Sun, Briefcase, Award, Mail } from 'lucide-react';
+import { Volume2, VolumeX, Moon, Sun, Briefcase, Award, Mail, User } from 'lucide-react';
 
 interface HUDOverlayProps {
   theme: 'dark' | 'light';
@@ -20,7 +20,7 @@ export const HUDOverlay: React.FC<HUDOverlayProps> = ({
 }) => {
   return (
     <header className="z-50 fixed inset-x-0 top-0 flex justify-between items-center px-4 sm:px-8 lg:px-14 py-4 lg:py-6 font-sans pointer-events-none select-none">
-      {/* Brand / Logo (Modern Sleek Stylized Badge) */}
+      {/* Brand / Logo */}
       <button
         onClick={() => {
           sound.playClick();
@@ -31,12 +31,25 @@ export const HUDOverlay: React.FC<HUDOverlayProps> = ({
       >
         <span className="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 group-hover:scale-125 transition-transform" />
         <span className="font-sans font-bold text-sm tracking-tight">
-          WEN<span className="text-cyan-400">.</span>DESIGN
+          RIZKYANO<span className="text-cyan-400">.</span>DEV
         </span>
       </button>
 
-      {/* Action Controls (Modern Sans-serif Glass Capsule) */}
+      {/* Action Controls */}
       <div className="flex items-center gap-2 sm:gap-3 pointer-events-auto">
+        {/* About Nav Link */}
+        <button
+          onClick={() => {
+            sound.playClick();
+            onNavigate('about');
+          }}
+          onMouseEnter={() => sound.playHover()}
+          className="hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-full dark:bg-[#080d1a]/70 bg-white/80 backdrop-blur-md dark:border-white/10 border-slate-200 text-xs font-sans font-medium dark:text-slate-300 text-slate-700 hover:text-emerald-500 dark:hover:text-white dark:hover:border-white/30 hover:border-emerald-300 transition-all shadow-sm"
+        >
+          <User size={13} className="text-emerald-500" />
+          <span>About</span>
+        </button>
+
         {/* Work Nav Link */}
         <button
           onClick={() => {
@@ -47,10 +60,10 @@ export const HUDOverlay: React.FC<HUDOverlayProps> = ({
           className="hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-full dark:bg-[#080d1a]/70 bg-white/80 backdrop-blur-md dark:border-white/10 border-slate-200 text-xs font-sans font-medium dark:text-slate-300 text-slate-700 hover:text-cyan-400 dark:hover:text-white dark:hover:border-white/30 hover:border-cyan-300 transition-all shadow-sm"
         >
           <Briefcase size={13} className="text-cyan-400" />
-          <span>Selected Works</span>
+          <span>Works</span>
         </button>
 
-        {/* Experience Nav Link (with Award Icon) */}
+        {/* Experience Nav Link */}
         <button
           onClick={() => {
             sound.playClick();

@@ -3,6 +3,7 @@ import Lenis from 'lenis';
 import { WebGLCanvas } from './components/WebGLCanvas';
 import { HUDOverlay } from './components/HUDOverlay';
 import { HeroSection } from './components/HeroSection';
+import { AboutSection } from './components/AboutSection';
 import { ProjectGrid } from './components/ProjectGrid';
 import { ExperienceSection } from './components/ExperienceSection';
 import { ContactFooter } from './components/ContactFooter';
@@ -117,6 +118,9 @@ export function App() {
       {/* Main Content Container */}
       <main className="relative z-10 max-w-[1700px] mx-auto">
         <HeroSection />
+
+        {/* Restored About Section after Hero and before Selected Works */}
+        <AboutSection />
 
         <ProjectGrid 
           onSelectProject={(project) => setSelectedProject(project)}
